@@ -14,9 +14,7 @@ def download_video(link: str) -> str:
         print(f'Title: {yt.title}')
         print(f'Channel: {yt.author}')
         print(f'Duration: {yt.length}')
-        path = yt.streams.get_highest_resolution().download('downloads')
-        return path
-
+        return yt.streams.get_highest_resolution().download('downloads')
     except exceptions.RegexMatchError:
         logger.error(msg='Not a Valid YouTube URL')
         return None
@@ -36,8 +34,7 @@ def download_video(link: str) -> str:
 
 if __name__ == '__main__':
     link = input('Enter a valid YouTube Link : ')
-    save_path = download_video(link)
-    if(save_path):
+    if save_path := download_video(link):
         print(f'Video Downloaded at {save_path}')
     else:
         print('Some Error occured, check Log for more details')

@@ -11,7 +11,7 @@ r = sr.Recognizer()
 # and applies speech recognition
 def get_large_audio_transcription(path):
     # open the audio file using pydub
-    sound = AudioSegment.from_wav(path)  
+    sound = AudioSegment.from_wav(path)
     # split audio sound where silence is 700 miliseconds or more and get chunks
     chunks = split_on_silence(sound,
         # experiment with this value for your target audio file
@@ -26,7 +26,7 @@ def get_large_audio_transcription(path):
     if not os.path.isdir(foldername):
         os.mkdir(foldername)
     wholetext = ""
-    # process each chunk 
+    # process each chunk
     for i, audio_chunk in enumerate(chunks, start=1):
         # export audio chunk and save it in
         # the `folder_name` directory.
@@ -39,7 +39,7 @@ def get_large_audio_transcription(path):
             try:
                 text = r.recognize_google(audiolistened)
             except sr.UnknownValueError as e:
-                print("Error:", str(e))
+                print("Error:", e)
             else:
                 text = f"{text.capitalize()}. "
                 print(chunkfilename, ":", text)

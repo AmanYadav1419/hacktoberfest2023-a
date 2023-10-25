@@ -55,33 +55,35 @@ while True:
     print()
 
     #Create New Database
-    if c==1:
+    if c == 1:
         MakeDatabase()
 
-    #Add Book
-    elif c==2:
+    elif c == 2:
         ConnectSQL()
         w=input("Enter Book Code: ")
         x=input("Enter Book Name: ")
         y=input("Enter Author Name: ")
         z=int(input("Enter Total no. of Books in stock: "))
-        b.execute("insert into Books(Code,Name,Author,Stock) VALUES('{}','{}','{}',{})".format(w,x,y,z))
+        b.execute(
+            f"insert into Books(Code,Name,Author,Stock) VALUES('{w}','{x}','{y}',{z})"
+        )
         a.commit()
         print("\nSuccessfully Saved the Book Data.")
 
-    #Issue Book
-    elif c==3:
+    elif c == 3:
         ConnectSQL()
-        e=0
         x=input("Enter Book Code: ")
         y=input("Enter Member Name: ")
         z=input("Enter Issued Date: ")
         o="select Code,Stock from Books;"
         Fetch(o)
+        e = 0
         for i in d:
             if i[0]==x and i[1]>0:
-                b.execute("insert into Members(BookCode,Member,Date) VALUES('{}','{}','{}')".format(x,y,z))
-                b.execute("update Books set Stock=Stock-1 where Code='{}';".format(x))
+                b.execute(
+                    f"insert into Members(BookCode,Member,Date) VALUES('{x}','{y}','{z}')"
+                )
+                b.execute(f"update Books set Stock=Stock-1 where Code='{x}';")
                 a.commit()
                 print("\nSuccessfully Issued the Book with the Name",y)
                 break
@@ -95,8 +97,7 @@ while True:
                 print("\nBook is Not Available In Library.")
                 a.commit()
 
-    #Sumbit Book
-    elif c==4:
+    elif c == 4:
         ConnectSQL()
         e=0
         x=input("Enter Book Code: ")
@@ -105,8 +106,8 @@ while True:
         Fetch(o)
         for i in d:
             if i[0]==x and i[1]==y:
-                b.execute("delete from Members where BookCode='{}' and Member='{}';".format(x,y))
-                b.execute("update Books set Stock=Stock+1 where Code='{}';".format(x))
+                b.execute(f"delete from Members where BookCode='{x}' and Member='{y}';")
+                b.execute(f"update Books set Stock=Stock+1 where Code='{x}';")
                 a.commit()
                 print("\nSuccessfully Sumbitted the Book.")
                 break
@@ -116,16 +117,14 @@ while True:
                 print("\nBook is Not Available In Library.")
                 a.commit()
 
-    #Delete Book
-    elif c==5:
+    elif c == 5:
         ConnectSQL()
         x=input("Enter Book Code to Delete: ")
-        b.execute("delete from Books where Code='{}';".format(x))
+        b.execute(f"delete from Books where Code='{x}';")
         a.commit()
         print("\nDeleted the Book Sucessfully.")
 
-    #Display Issued Books
-    elif c==7:
+    elif c == 7:
         ConnectSQL()
         o="select * from Members;"
         Fetch(o)
@@ -133,11 +132,9 @@ while True:
         for i in d:
             print(i)
 
-    #Exit
-    elif c==8:
+    elif c == 8:
         break
 
-    #Display All Books Data
     else:
         ConnectSQL()
         o="select * from Books;"

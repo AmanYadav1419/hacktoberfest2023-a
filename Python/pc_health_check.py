@@ -16,8 +16,7 @@ def check_disk_usage(disk):
 
 
 def check_cpu_usage():
-    usage = psutil.cpu_percent(1)
-    return usage
+    return psutil.cpu_percent(1)
 
 
 a = check_disk_usage("/")

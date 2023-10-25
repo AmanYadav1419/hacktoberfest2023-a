@@ -79,12 +79,12 @@ def send_email(to, content):
 
 def cpu():
     usage = str(psutil.cpu_percent())
-    speak('CPU is at' +usage)
+    speak(f'CPU is at{usage}')
     battery = psutil.sensors_battery()
     speak("battery is ")
     speak(battery.percent)
     temp = psutil.sensors_temperatures()
-    speak('current temperature is'+temp)
+    speak(f'current temperature is{temp}')
 
 
 def Take_command ():
@@ -145,19 +145,18 @@ if __name__ == "__main__":
             chromepath = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe %s'
 # chromepath stores the chromes location
             search = Take_command().lower()
-            wb.get(chromepath).open_new_tab(search+'.com')
-# It only search for websites ending with .com
+            wb.get(chromepath).open_new_tab(f'{search}.com')
         elif 'search youtube' in query:
             speak('what should i search?')
             search_term = Take_command().lower()
             speak("HERE WE go to YOUTUBE!")
-            wb.open('https://www.youtube.com/result?search_query='+search_term)
+            wb.open(f'https://www.youtube.com/result?search_query={search_term}')
 
         elif 'search google' in query:
             speak('what should i search?')
             search_term = Take_command().lower()
             speak("HERE WE go to GOOGLE!")
-            wb.open('https://www.google.com/search?q=' + search_term)
+            wb.open(f'https://www.google.com/search?q={search_term}')
 
         elif 'cpu' in query:
             cpu()
@@ -200,7 +199,7 @@ if __name__ == "__main__":
             screenshot()
 
         elif 'play_music' in query:
-            
+
             song_dr = filedialog.askopenfilename()
             music = os.listdir(song_dr)
             speak('what should i play?')
@@ -211,16 +210,12 @@ if __name__ == "__main__":
         elif 'remember that' in query:
             speak('What should i remember,sir?')
             memory =Take_command()
-            speak('you asked me to remember that'+memory)
-            remember = open('memory.txt', 'a')
-            remember.write(memory)
-            remember.close()
-
+            speak(f'you asked me to remember that{memory}')
+            with open('memory.txt', 'a') as remember:
+                remember.write(memory)
         elif 'do you remember anything' in query:
-            remember =open('memory.txt', 'r')
-            speak('You asked me to remember that'+remember.read())
-            remember.close()
-
+            with open('memory.txt', 'r') as remember:
+                speak(f'You asked me to remember that{remember.read()}')
         elif 'news' in query:
             try:
                 jsonObj = urlopen('http://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=8310479d0e7f473fad636f532b41b8b0')
@@ -229,17 +224,17 @@ if __name__ == "__main__":
                 speak("Here are some top headline from you")
                 print("==========TOP HEADLINES==========")
                 for item in data['articles']:
-                    print(str(i)+ ':'+item['title']+'\n')
+                    print(f'{str(i)}:' + item['title'] + '\n')
                     print(item['description']+'\n\n')
                     speak(item['title'])
                     i=i+1
             except Exception as e:
-                print(str(e))
+                print(e)
 
         elif 'where is' in query:
             location = query.replace("where is","")
-            speak("you asked me to locate"+ location)
-            wb.open_new_tab("https://www.google.com/maps/place/"+location)
+            speak(f"you asked me to locate{location}")
+            wb.open_new_tab(f"https://www.google.com/maps/place/{location}")
 
         elif 'calculate' in query:
             client = wolframalpha.Client(wolframalpha_app_id)
@@ -247,10 +242,10 @@ if __name__ == "__main__":
             query = query.split()[indx+ 1:]
             res = client.query(''.join(query))
             answer = next(res.results).text
-            print('the Answer is :'+answer)
-            speak('the Answer is :'+answer)
+            print(f'the Answer is :{answer}')
+            speak(f'the Answer is :{answer}')
 
-        elif 'what is' in query or 'who is ':
+        else:
             client = wolframalpha.Client(wolframalpha_app_id)
             res = client.query(query)
             try:
@@ -259,20 +254,3 @@ if __name__ == "__main__":
             except StopIteration:
                 print('no result found!')
                 speak('No result found!')
-
-        elif 'stop listening' in query:
-            speak('For How many seconds ,sir')
-            ans = int(Take_command())
-            time.sleep(ans)
-            print(ans)
-# GIVING COMPUTERS CONTROLS
-
-        elif 'log out' in query:
-            os.system("shutdown -1")
-        elif 'restart' in query:
-            os.system("shutdown /r /t 1")
-        elif 'shutdown' in query:
-            os.system("shutdown /s /t 1")
-
-        else:
-            speak("SORRY I DON'T KNOW")

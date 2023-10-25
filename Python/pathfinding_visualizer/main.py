@@ -438,12 +438,9 @@ def main(win, width):
                     end = node
                     end.make_end()
 
-                # Since user can set 3 types of node, start , end and barrier
-                # if we already have start and end then rest of clicks are barriers
-                elif node != end and node != start:
+                elif node not in [end, start]:
                     node.make_barrier()
 
-            # Right mouse button resets the nodes and we can assign it elsewhere
             elif pygame.mouse.get_pressed()[2]:  # RIGHT
                 pos = pygame.mouse.get_pos()   # Gets the position of mouse on screen
                 row, col = get_clicked_pos(pos, ROWS, width)

@@ -31,10 +31,14 @@ async def on_message(message):
                 search=search + k + ' '
                 link=link + k + '_'
             result = wikipedia.summary(search, sentences = 3)
-            embed = discord.Embed(title='Go to wikipedia',url="https://en.wikipedia.org/wiki"+link,description=result)
+            embed = discord.Embed(
+                title='Go to wikipedia',
+                url=f"https://en.wikipedia.org/wiki{link}",
+                description=result,
+            )
             await message.channel.send(embed=embed)
         except:
-            await message.channel.send("could not find "+search+" on wikipedia")
+            await message.channel.send(f"could not find {search} on wikipedia")
 
     elif message.content.startswith("cheat question"):
         no_of_options=4
@@ -42,11 +46,11 @@ async def on_message(message):
         question_list=message.content.split()
         if question_list[-1].isnumeric():
             no_of_options=int(question_list[-1])
-            for k in question_list[2:len(question_list)-1]:
+            for k in question_list[2:-1]:
                 question=question + k + ' '
         else:
             no_of_options=4
-            for k in question_list[2:len(question_list)]:
+            for k in question_list[2:]:
                 question=question + k + ' '
         print(no_of_options)
         print(question)
@@ -54,7 +58,7 @@ async def on_message(message):
         for k in range(no_of_options):
             await message.channel.send(reactions[k])
 
-    
+
     elif message.content.startswith("cheat help"):
         await message.channel.send("""Commands
 -------------------------------------------------------------------------------------------------------
@@ -81,7 +85,7 @@ cheat error SIGSEV""")
                 error_statement=error_statement + k + ' '
         else:
             error_statement=''
-            for k in error_list[2:len(error_list)]:
+            for k in error_list[2:]:
                 error_statement=error_statement + k + ' '
         def solve_error(error: str, max_links: int = 3) -> [(str, str)]:
             SITE = StackAPI('stackoverflow')
@@ -95,8 +99,9 @@ cheat error SIGSEV""")
                     if count > max_links:
                         break
                     links.append((ans['title'], ans['link']))
-            
+
             return links
+
         if flag==1:
             for link in solve_error(error_statement,no_of_links):
                 embed = discord.Embed(title=link[0],url=link[1],description="For more clarification visit above links")

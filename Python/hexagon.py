@@ -10,5 +10,5 @@ def triangle():
     triangle_turtle.right(120)
     triangle_turtle.forward(100)
 
-for count in range(6):
+for _ in range(6):
     triangle()

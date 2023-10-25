@@ -6,14 +6,14 @@ print("Total elements:")
 t=int(input())
 print("input elements:")
 
-for j in range(0,t):
+for _ in range(0,t):
     p=int(input())
     if p>n:
        print("out of bounds")
     else:
-        l.append(p) 
-print("Unsorted list is:")        
-print(l)  
+        l.append(p)
+print("Unsorted list is:")
+print(l)
 print("Sorted list is:")
 l.sort()
 print(l)

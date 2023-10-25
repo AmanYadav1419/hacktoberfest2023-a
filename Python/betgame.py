@@ -16,7 +16,7 @@ while True:
         randomnum = baya(x,y)
 
         print ("Wait! Wait! Wait!")
-        for i in range(6):
+        for _ in range(6):
                 print(".")
                 sleep(1)
         print ("Computer gote choose kala number:",randomnum)
@@ -25,24 +25,21 @@ while True:
         if num == randomnum:
                 print("Congrats! You Won")
                 print("Your price has been doubled")
-                if bet == 'small':
-                        money += 20
-                elif bet == 'large':
+                if bet == 'large':
                         money += 100
-                print("Your money left:", money)
+                elif bet == 'small':
+                        money += 20
         else:
                 print("You Noob Loser")
                 print("You have less money now")
-                if bet == 'small':
-                        money -= 5
-                elif bet == 'large':
+                if bet == 'large':
                         money -= 25
-                print("Your money left:",money)
-
+                elif bet == 'small':
+                        money -= 5
+        print("Your money left:", money)
         response = input("Do you wish to continue? Y/N: ")
         if response == 'Y':
                 continue
-        else:
-                print("You Noob Loser, NO playing More")
-                break
+        print("You Noob Loser, NO playing More")
+        break
 

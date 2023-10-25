@@ -5,8 +5,7 @@ from matplotlib import pyplot as plt
 def roi(image,vertices):
     mask=np.zeros_like(image)
     cv2.fillPoly(mask,vertices,255)
-    masked_image=cv2.bitwise_and(image,mask)
-    return masked_image
+    return cv2.bitwise_and(image,mask)
 def image_with_lines(image,lines):
     image=np.copy(image)
     blank_image=np.zeros((image.shape[0],image.shape[1],3),np.uint8)

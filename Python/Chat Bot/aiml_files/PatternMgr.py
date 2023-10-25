@@ -28,7 +28,7 @@ class PatternMgr:
         self._templateCount = 0
         self._botName = u"Nameless"
         punctuation = "\"`~!@#$%^&*()-_=+[{]}\|;:',<.>/?"
-        self._puncStripRE = re.compile("[" + re.escape(punctuation) + "]")
+        self._puncStripRE = re.compile(f"[{re.escape(punctuation)}]")
         self._whitespaceRE = re.compile("\s+", re.UNICODE)
 
     def numTemplates(self):
@@ -51,25 +51,23 @@ class PatternMgr:
         restore later, use restore().
         """
         try:
-            outFile = open(filename, "wb")
-            marshal.dump(self._templateCount, outFile)
-            marshal.dump(self._botName, outFile)
-            marshal.dump(self._root, outFile)
-            outFile.close()
+            with open(filename, "wb") as outFile:
+                marshal.dump(self._templateCount, outFile)
+                marshal.dump(self._botName, outFile)
+                marshal.dump(self._root, outFile)
         except Exception as e:
-            print( "Error saving PatternMgr to file %s:" % filename )
+            print(f"Error saving PatternMgr to file {filename}:")
             raise
 
     def restore(self, filename):
         """Restore a previously save()d collection of patterns."""
         try:
-            inFile = open(filename, "rb")
-            self._templateCount = marshal.load(inFile)
-            self._botName = marshal.load(inFile)
-            self._root = marshal.load(inFile)
-            inFile.close()
+            with open(filename, "rb") as inFile:
+                self._templateCount = marshal.load(inFile)
+                self._botName = marshal.load(inFile)
+                self._root = marshal.load(inFile)
         except Exception as e:
-            print( "Error restoring PatternMgr from file %s:" % filename )
+            print(f"Error restoring PatternMgr from file {filename}:")
             raise
 
     def add(self, data, template):
@@ -181,7 +179,7 @@ class PatternMgr:
 
         # Pass the input off to the recursive pattern-matcher
         patMatch, template = self._match(input_.split(), thatInput.split(), topicInput.split(), self._root)
-        if template == None:
+        if template is None:
             return ""
 
         # Extract the appropriate portion of the pattern, based on the
@@ -199,7 +197,7 @@ class PatternMgr:
         else:
             # unknown value
             raise ValueError( "starType must be in ['star', 'thatstar', 'topicstar']" )
-        
+
         # compare the input string to the matched pattern, word by word.
         # At the end of this loop, if foundTheRightStar is true, start and
         # end will contain the start and end indices (in "words") of
@@ -240,14 +238,13 @@ class PatternMgr:
                     break
             # Move to the next element of the pattern.
             j += 1
-            
-        # extract the star words from the original, unmutilated input.
-        if foundTheRightStar:
-            #print( ' '.join(pattern.split()[start:end+1]) )
-            if starType == 'star': return ' '.join(pattern.split()[start:end+1])
-            elif starType == 'thatstar': return ' '.join(that.split()[start:end+1])
-            elif starType == 'topicstar': return ' '.join(topic.split()[start:end+1])
-        else: return u""
+
+        if not foundTheRightStar:
+            return u""
+        #print( ' '.join(pattern.split()[start:end+1]) )
+        if starType == 'star': return ' '.join(pattern.split()[start:end+1])
+        elif starType == 'thatstar': return ' '.join(that.split()[start:end+1])
+        elif starType == 'topicstar': return ' '.join(topic.split()[start:end+1])
 
     def _match(self, words, thatWords, topicWords, root):
         """Return a tuple (pat, tem) where pat is a list of nodes, starting
@@ -281,7 +278,7 @@ class PatternMgr:
                 except KeyError:
                     pattern = []
                     template = None
-            if template == None:
+            if template is None:
                 # we're totally out of input.  Grab the template at this node.
                 pattern = []
                 try: template = root[self._TEMPLATE]
@@ -290,7 +287,7 @@ class PatternMgr:
 
         first = words[0]
         suffix = words[1:]
-        
+
         # Check underscore.
         # Note: this is causing problems in the standard AIML set, and is
         # currently disabled.
@@ -317,7 +314,7 @@ class PatternMgr:
             if template is not None:
                 newPattern = [first] + pattern
                 return (newPattern, template)
-        
+
         # check star
         if self._STAR in root:
             # Must include the case where suf is [] in order to handle the case

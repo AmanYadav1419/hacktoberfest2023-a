@@ -1,20 +1,16 @@
 # writing data in p.csv file
-f=open('CONTRIBUTERS.md','r')
-f1=open('p.csv','w')
-f1.write('Name,Github\n')
-f.readline()
-f.readline()
-# f1.write("{'CONTRIBUTERS-DETAILS':[")
-d=dict()
-for i in f:
-    i=i.split('|')
-    name=i[1].strip()
-    username=i[2].split('[@')[1].split(']')[0].strip()
-    f1.write(name+','+username+'\n')
-#     d[username]=name
-#     print()
-# f1.write("]}")
-f.close()
+with open('CONTRIBUTERS.md','r') as f:
+    f1=open('p.csv','w')
+    f1.write('Name,Github\n')
+    f.readline()
+    f.readline()
+    # f1.write("{'CONTRIBUTERS-DETAILS':[")
+    d=dict()
+    for i in f:
+        i=i.split('|')
+        name=i[1].strip()
+        username=i[2].split('[@')[1].split(']')[0].strip()
+        f1.write(name+','+username+'\n')
 f1.close()
 
 # printing code

@@ -109,8 +109,11 @@ while True:
 		score = 0
 		delay = 0.1
 		pen.clear()
-		pen.write("Score : {} High Score : {} ".format(
-			score, high_score), align="center", font=("candara", 24, "bold"))
+		pen.write(
+			f"Score : {score} High Score : {high_score} ",
+			align="center",
+			font=("candara", 24, "bold"),
+		)
 	if head.distance(food) < 20:
 		x = random.randint(-270, 270)
 		y = random.randint(-270, 270)
@@ -128,14 +131,17 @@ while True:
 		if score > high_score:
 			high_score = score
 		pen.clear()
-		pen.write("Score : {} High Score : {} ".format(
-			score, high_score), align="center", font=("candara", 24, "bold"))
+		pen.write(
+			f"Score : {score} High Score : {high_score} ",
+			align="center",
+			font=("candara", 24, "bold"),
+		)
 	# Checking for head collisions with body segments
 	for index in range(len(segments)-1, 0, -1):
 		x = segments[index-1].xcor()
 		y = segments[index-1].ycor()
 		segments[index].goto(x, y)
-	if len(segments) > 0:
+	if segments:
 		x = head.xcor()
 		y = head.ycor()
 		segments[0].goto(x, y)
@@ -154,8 +160,11 @@ while True:
 			score = 0
 			delay = 0.1
 			pen.clear()
-			pen.write("Score : {} High Score : {} ".format(
-				score, high_score), align="center", font=("candara", 24, "bold"))
+			pen.write(
+				f"Score : {score} High Score : {high_score} ",
+				align="center",
+				font=("candara", 24, "bold"),
+			)
 	time.sleep(delay)
 
 wn.mainloop()

@@ -11,7 +11,7 @@ def search(pattern, text, q):
     i = 0
     j = 0
 
-    for i in range(m-1):
+    for _ in range(m-1):
         h = (h*d) % q
 
     # Calculate hash value for pattern and text
@@ -28,7 +28,7 @@ def search(pattern, text, q):
 
             j += 1
             if j == m:
-                print("Pattern is found at position: " + str(i+1))
+                print(f"Pattern is found at position: {str(i + 1)}")
 
         if i < n-m:
             t = (d*(t-ord(text[i])*h) + ord(text[i+m])) % q

@@ -59,11 +59,7 @@ def get_paper():
     # url = f"https://epaper.telegraphindia.com/epaperimages////{finaltime}////{finaltime}-md-hr-"
     url = f"https://epaper.{name}.com/epaperimages////{finaltime}////{finaltime}-md-hr-"
 
-    # print(url)
-
-    lst = []
-    for i in range(1, int(spin_box.get()) + 1):
-        lst.append(url + f"{i}ll.png")
+    lst = [f"{url}{i}ll.png" for i in range(1, int(spin_box.get()) + 1)]
     # print(lst)
 
     with open(f"{file_name}/{dt_stamp} {name}.pdf", "wb") as f:

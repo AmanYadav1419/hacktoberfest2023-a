@@ -13,7 +13,7 @@ while True:
     print()
     z=input("You want to play again (y/n): ")
     print()
-    if z=="n" or z=="N":
+    if z in ["n", "N"]:
         break
 
         

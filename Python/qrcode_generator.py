@@ -4,9 +4,7 @@ def convert(url):
         return 'http://' + url[len('http://www.'):]
     if url.startswith('www.'):
         return 'https://' + url[len('www.'):]
-    if not url.startswith('https://'):
-        return 'https://www.' + url+".com"
-    return url 
+    return f'https://www.{url}.com' if not url.startswith('https://') else url 
 url=input("Enter a website name/url: ")
 print(convert(url))
 img=qrcode.make(url)

@@ -34,44 +34,44 @@ def check():
 	x=''
 	flag=0
 	if count>=5:
-		if l[1]==l[4] and l[4]==l[7]:
+		if l[1] == l[4] == l[7]:
 			x=l[1]
-			if x=="X":
-				messagebox.showinfo("game over",n1+" won the game")
+			if x == "O":
+				messagebox.showinfo("game over", f"{n2} won the game")
 				flag=1
 				sys.exit()
-			if x=="O":
-				messagebox.showinfo("game over",n2+" won the game")
+			elif x == "X":
+				messagebox.showinfo("game over", f"{n1} won the game")
 				flag=1
 				sys.exit()
-		if l[0]==l[1] and l[1]==l[2] or l[0]==l[4] and l[4]==l[8]:
+		if l[0] == l[1] == l[2] or l[0] == l[4] == l[8]:
 			x=l[0]
-			if x=="X":
-				messagebox.showinfo("game over",n1+" won the game")
+			if x == "O":
+				messagebox.showinfo("game over", f"{n2} won the game")
 				flag=1
 				sys.exit()
-			if x=="O":
-				messagebox.showinfo("game over",n2+" won the game")
+			elif x == "X":
+				messagebox.showinfo("game over", f"{n1} won the game")
 				flag=1
 				sys.exit()
-		if l[3]==l[4] and l[4]==l[5] or l[0]==l[3] and l[3]==l[6]:
+		if l[3] == l[4] == l[5] or l[0] == l[3] == l[6]:
 			x=l[3]
-			if x=="X":
-				messagebox.showinfo("game over",n1+" won the game")
+			if x == "O":
+				messagebox.showinfo("game over", f"{n2} won the game")
 				flag=1
 				sys.exit()
-			if x=="O":
-				messagebox.showinfo("game over",n2+" won the game")
+			elif x == "X":
+				messagebox.showinfo("game over", f"{n1} won the game")
 				flag=1
 				sys.exit()
-		if l[6]==l[7] and l[7]==l[8] or l[2]==l[4] and l[4]==l[6] or l[2]==l[5] and l[5]==l[8] :
+		if l[6] == l[7] == l[8] or l[2] == l[4] == l[6] or l[2] == l[5] == l[8]:
 			x=l[6]
-			if x=="X":
-				messagebox.showinfo("game over",n1+" won the game")
+			if x == "O":
+				messagebox.showinfo("game over", f"{n2} won the game")
 				flag=1
 				sys.exit()
-			if x=="O":
-				messagebox.showinfo("game over",n2+" won the game")
+			elif x == "X":
+				messagebox.showinfo("game over", f"{n1} won the game")
 				flag=1
 				sys.exit()
 	if count==9 and flag==0:
@@ -89,10 +89,10 @@ def click1():
 		b1['cursor']="circle"
 	b1['text']=st
 	b1['state']=DISABLED
-	if st=="X":
-		b1['bg']="light green"
-	if st=="O":
+	if st == "O":
 		b1['bg']="light blue"
+	elif st == "X":
+		b1['bg']="light green"
 	l[0]=st
 	count+=1
 	check()
@@ -109,10 +109,10 @@ def click2():
 	l[1]=st
 	b2['text']=st
 	b2['state']=DISABLED
-	if st=="X":
-		b2['bg']="light green"
-	if st=="O":
+	if st == "O":
 		b2['bg']="light blue"
+	elif st == "X":
+		b2['bg']="light green"
 	count+=1
 	check()
 
@@ -129,10 +129,10 @@ def click3():
 	l[2]=st
 	b3['text']=st
 	b3['state']=DISABLED
-	if st=="X":
-		b3['bg']="light green"
-	if st=="O":
+	if st == "O":
 		b3['bg']="light blue"
+	elif st == "X":
+		b3['bg']="light green"
 	count+=1
 	check()
 
@@ -149,10 +149,10 @@ def click4():
 	l[3]=st
 	b4['text']=st
 	b4['state']=DISABLED
-	if st=="X":
-		b4['bg']="light green"
-	if st=="O":
+	if st == "O":
 		b4['bg']="light blue"
+	elif st == "X":
+		b4['bg']="light green"
 	count+=1
 	check()
 
@@ -169,10 +169,10 @@ def click5():
 	l[4]=st
 	b5['text']=st
 	b5['state']=DISABLED
-	if st=="X":
-		b5['bg']="light green"
-	if st=="O":
+	if st == "O":
 		b5['bg']="light blue"
+	elif st == "X":
+		b5['bg']="light green"
 	count+=1
 	check()
 
@@ -189,10 +189,10 @@ def click6():
 	l[5]=st
 	b6['text']=st
 	b6['state']=DISABLED
-	if st=="X":
-		b6['bg']="light green"
-	if st=="O":
+	if st == "O":
 		b6['bg']="light blue"
+	elif st == "X":
+		b6['bg']="light green"
 	count+=1
 	check()
 
@@ -209,10 +209,10 @@ def click7():
 	l[6]=st
 	b7['text']=st
 	b7['state']=DISABLED
-	if st=="X":
-		b7['bg']="light green"
-	if st=="O":
+	if st == "O":
 		b7['bg']="light blue"
+	elif st == "X":
+		b7['bg']="light green"
 	count+=1
 	check()
 
@@ -229,10 +229,10 @@ def click8():
 	l[7]=st
 	b8['text']=st
 	b8['state']=DISABLED
-	if st=="X":
-		b8['bg']="light green"
-	if st=="O":
+	if st == "O":
 		b8['bg']="light blue"
+	elif st == "X":
+		b8['bg']="light green"
 	count+=1
 	check()
 
@@ -249,10 +249,10 @@ def click9():
 	l[8]=st
 	b9['text']=st
 	b9['state']=DISABLED
-	if st=="X":
-		b9['bg']="light green"
-	if st=="O":
+	if st == "O":
 		b9['bg']="light blue"
+	elif st == "X":
+		b9['bg']="light green"
 	count+=1
 	check()
 

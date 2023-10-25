@@ -14,7 +14,7 @@ sign = 0
 
 # Creates an empty board
 global board
-board = [[" " for x in range(3)] for y in range(3)]
+board = [[" " for _ in range(3)] for _ in range(3)]
 
 # Check l(O/X) won the match or not
 # according to the rules of the game
@@ -85,33 +85,24 @@ def gameboard_pl(game_board, l1, l2):
 def pc():
 	possiblemove = []
 	for i in range(len(board)):
-		for j in range(len(board[i])):
-			if board[i][j] == ' ':
-				possiblemove.append([i, j])
+		possiblemove.extend([i, j] for j in range(len(board[i])) if board[i][j] == ' ')
 	move = []
-	if possiblemove == []:
+	if not possiblemove:
 		return
-	else:
-		for let in ['O', 'X']:
-			for i in possiblemove:
-				boardcopy = deepcopy(board)
-				boardcopy[i[0]][i[1]] = let
-				if winner(boardcopy, let):
-					return i
-		corner = []
+	for let in ['O', 'X']:
 		for i in possiblemove:
-			if i in [[0, 0], [0, 2], [2, 0], [2, 2]]:
-				corner.append(i)
-		if len(corner) > 0:
-			move = random.randint(0, len(corner)-1)
-			return corner[move]
-		edge = []
-		for i in possiblemove:
-			if i in [[0, 1], [1, 0], [1, 2], [2, 1]]:
-				edge.append(i)
-		if len(edge) > 0:
-			move = random.randint(0, len(edge)-1)
-			return edge[move]
+			boardcopy = deepcopy(board)
+			boardcopy[i[0]][i[1]] = let
+			if winner(boardcopy, let):
+				return i
+	if corner := [
+		i for i in possiblemove if i in [[0, 0], [0, 2], [2, 0], [2, 2]]
+	]:
+		move = random.randint(0, len(corner)-1)
+		return corner[move]
+	if edge := [i for i in possiblemove if i in [[0, 1], [1, 0], [1, 2], [2, 1]]]:
+		move = random.randint(0, len(edge)-1)
+		return edge[move]
 
 # Configure text on button while playing with system
 def get_text_pc(i, j, gb, l1, l2):

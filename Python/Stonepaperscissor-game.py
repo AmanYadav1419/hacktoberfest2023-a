@@ -4,22 +4,13 @@ b='y'
 while(b=='y'):
   def gamewin(comp,you):
     if comp==you:
-        return None
+      return None
     elif comp== 'st':
-        if you== 'p':
-            return True
-        else:
-            return False
+      return you == 'p'
     elif comp== 'p':
-        if you== 'sc':
-            return True
-        else:
-            return False
+      return you == 'sc'
     else:
-        if you== 'st':
-            return True
-        else:
-            return False
+      return you == 'st'
 
 
   print("Computer's turn: Stone(st), Paper(p), Scissor(sc)")

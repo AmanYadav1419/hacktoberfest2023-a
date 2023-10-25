@@ -14,8 +14,7 @@ def price_check():
 
     response = requests.request("GET", url, params=querystring)
     response = json.loads(response.text)
-    current_price = response['USD']
-    return current_price
+    return response['USD']
 
 while True:
     market_price = price_check()

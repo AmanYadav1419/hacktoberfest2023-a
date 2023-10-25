@@ -18,11 +18,10 @@ def chat():
     while True:
         excitation = input('')
         response = kernel.respond(excitation)
-        if excitation == 'EXIT' or excitation == 'exit' or excitation == 'Exit':
+        if excitation in ['EXIT', 'exit', 'Exit']:
             break
-        else:
-            print('>>> '+response)
-            kernel.saveBrain("bot_brain.brn")
+        print(f'>>> {response}')
+        kernel.saveBrain("bot_brain.brn")
     print("Session Ended")
 
 

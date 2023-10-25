@@ -6,7 +6,7 @@ def emoji_convertor(message):
     }
     output = ""
     for word in words:
-        output += emojis.get(word, word) + " "
+        output += f"{emojis.get(word, word)} "
         return output
 
 # PLEASE PROVIDE INPUT AS A :) or :()           

@@ -32,11 +32,11 @@ def sort(nums):
 
 
 #__main__
-lst = [] 
-n = int(input("Enter number of elements : ")) 
-for i in range(0, n): 
-    ele = int(input()) 
-    lst.append(ele)   
+lst = []
+n = int(input("Enter number of elements : "))
+for _ in range(0, n):
+  ele = int(input())
+  lst.append(ele)
 bsort=sort(lst)
 print("Here",bsort)    
 

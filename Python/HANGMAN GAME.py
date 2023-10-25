@@ -31,8 +31,7 @@ def play_game():
         # If user already guessed a letter
         if user_letter_guess in correct_guesses or user_letter_guess in incorrect_guess_letters:
             print('You already guessed that letter!')
-        # If user guessed a correct letter in the correct word
-        elif user_letter_guess in correct_letters and user_letter_guess not in correct_guesses:
+        elif user_letter_guess in correct_letters:
             correct_guesses.append(user_letter_guess)
             guessed = []
             for letters in correct_letters:
@@ -48,7 +47,6 @@ def play_game():
             if guessed == correct_letters:
                 winning_game_message(WINNING_WORD)
                 break
-        # If the user did not guess a correct letter
         elif user_letter_guess not in WINNING_WORD:
             incorrect_guess_counter += 1
             draw_hangman_game(incorrect_guess_counter)
@@ -65,7 +63,7 @@ def play_game():
 def show_game_description():
     print(f"I'm thinking of a word with {len(WINNING_WORD)} letters.") # put the description/directions here
     print(f'You have {MAX_INCORRECT_GUESSES} chances to guess the correct word! ')
-    print(f'If you want to exit the program at any time, hit enter.')
+    print('If you want to exit the program at any time, hit enter.')
 
 def winning_game_message(WINNING_WORD):
     print('')

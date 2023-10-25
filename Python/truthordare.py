@@ -13,8 +13,7 @@ import numpy as np
 
 
 def EnterPlayer():
-	playersk = list(input("Enter Players names with spaces: ").split(' '))
-	return playersk
+	return list(input("Enter Players names with spaces: ").split(' '))
 
 
 
@@ -37,8 +36,6 @@ if __name__ == '__main__':
 		e = int(input("Enter any integer except 0 : "))
 		if e != 0:
 			truth_or_dare(skl)
-		else:
-			pass
 
 		# print(skl)
 

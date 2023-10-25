@@ -4,9 +4,11 @@ class Point:
         self.y = y
 
 def onSegment(p, q, r):
-    if (((q.x <= max(p.x,r.x)) and q.x >= min(p.x, r.x)) or (q.y <= max(p.y, r.y)) and (q.y >= min(p.y, r.y))):
-        return True
-    return False
+    return (
+        ((q.x <= max(p.x, r.x)) and q.x >= min(p.x, r.x))
+        or (q.y <= max(p.y, r.y))
+        and (q.y >= min(p.y, r.y))
+    )
 
 def orientation(p, q, r):
    # val = float((q.y - p.y)*(r.x - q.x)) - float((q.x - p.x)*(r.y - q.y)) # Slope method
@@ -42,11 +44,7 @@ def doIntersect(p1,q1,p2,q2):
     if ((o3 == 0) and onSegment(p2, p1, q2)):
         return True
 
-    if ((o4 == 0) and onSegment(p2, q1, q2)):
-        return True
-
-    # else
-    return False
+    return bool(((o4 == 0) and onSegment(p2, q1, q2)))
 
 
 # Driver program to test above functions:

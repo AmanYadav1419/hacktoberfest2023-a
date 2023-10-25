@@ -6,7 +6,7 @@ def SumofGP(a,r,n):
 
 def ProductofGP(a,r,n):
     prod = 1
-    for i in range(0,n):
+    for _ in range(0,n):
         prod = prod * a
         a = a * r
     return prod

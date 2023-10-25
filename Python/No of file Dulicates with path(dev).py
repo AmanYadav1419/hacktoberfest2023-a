@@ -20,7 +20,7 @@ for path,folders,files in os.walk(p) :
 				l.append(file)
 				m.append(path)
 i=0
-while i<len(l) :
+while i<len(l):
 	c=0
 	s=l[i]
 	j=i+1
@@ -29,7 +29,7 @@ while i<len(l) :
 		if s == t:
 			print(f'File Name : {s}')
 			print(f'\tDefault Path : {m[i]}')
-			print(f'found.....!!!')
+			print('found.....!!!')
 			print(f'\tPath   :    {m[j]}')
 			l.remove(l[j])
 			c+=1

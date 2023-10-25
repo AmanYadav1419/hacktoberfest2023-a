@@ -65,7 +65,7 @@ def main():
             if event.type==QUIT or (event.type==KEYUP and event.key==K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            
+
             elif event.type==MOUSEBUTTONUP:
                 mousex,mousey=event.pos
                 mouseclicked=True
@@ -79,7 +79,7 @@ def main():
                 revealBoxesAnimation(mainboard,[(boxx,boxy)])
                 revealedboxes[boxx][boxy]=True
 
-                if firstselection==None:
+                if firstselection is None:
                     firstselection=(boxx,boxy)
                 else:
                     icon1shape,icon1color=getShapeAndColor(mainboard,firstselection[0],firstselection[1])
@@ -106,26 +106,21 @@ def main():
         fpsclock.tick(fps)
 
 def generateRevealedBoxesData(val):
-    revealedboxes=[]
-    for i in range(boardwidth):
-        revealedboxes.append([val]*boardheight)
-    return revealedboxes
+    return [[val]*boardheight for _ in range(boardwidth)]
 
 def getRandomizedBoard():
     icons=[]
     for color in allcolor:
-        for shape in allshape:
-            icons.append( (shape,color) )
-
+        icons.extend((shape, color) for shape in allshape)
     random.shuffle(icons)
     numIconsUsed= int(boardwidth*boardheight/2)
     icons=icons[:numIconsUsed]*2
     random.shuffle(icons)
 
     board=[]
-    for x in range(boardwidth):
+    for _ in range(boardwidth):
         column=[]
-        for y in range(boardheight):
+        for _ in range(boardheight):
             column.append(icons[0])
             del icons[0]
         board.append(column)
@@ -133,10 +128,7 @@ def getRandomizedBoard():
 
 def splitIntoGroupOf(groupsize,thelist):
 
-    result=[]
-    for i in range(0,len(thelist),groupsize):
-        result.append(thelist[i:i+groupsize])
-    return result
+    return [thelist[i:i+groupsize] for i in range(0,len(thelist),groupsize)]
 
 def leftTopCoordsOfBox(boxx,boxy):
     left=boxx*(boxsize+gapsize)+xmargin
@@ -211,8 +203,7 @@ def startGameAnimation(board):
     coveredBoxes=generateRevealedBoxesData(False)
     boxes=[]
     for x in range(boardwidth):
-        for y in range(boardheight):
-            boxes.append((x,y))
+        boxes.extend((x, y) for y in range(boardheight))
     random.shuffle(boxes)
     boxGroups= splitIntoGroupOf(8,boxes)
 
@@ -226,7 +217,7 @@ def gameWonAnimation(board):
     color1=lightbgcolor
     color2=bgcolor
 
-    for i in  range(13):
+    for _ in range(13):
         color1,color2=color2,color1
         Display.fill(color1)
         drawBoard(board,coveredBoxes)
@@ -235,9 +226,7 @@ def gameWonAnimation(board):
 
 def hasWon(revealedBoxes):
     for i in revealedBoxes:
-        if False in i:
-            return False
-        return True
+        return False not in i
 
 if __name__=='__main__':
     main()

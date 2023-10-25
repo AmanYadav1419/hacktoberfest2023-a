@@ -33,17 +33,14 @@ def getLiveStreams():
         return r.json()
 
 def buildM3u(jsonCat, jsonLive):
-    output = open('playlist.m3u', 'w+')
-    output.write("#EXTM3U")
+    with open('playlist.m3u', 'w+') as output:
+        output.write("#EXTM3U")
 
-    for channel in jsonLive:
-        for cat in jsonCat:
-            if channel['category_id'] == cat['category_id'] and cat['category_name'] not in unwantedCats:
-                output.write(f'\n#EXTINF:-1 tvg-id="{ channel["epg_channel_id"] }" tvg-name="{ channel["name"] }" tvg-logo="{ str(channel["stream_icon"]) }" group-title="{ cat["category_name"] }",{ channel["name"] }\n')
-                output.write(f'{ streamProtocol }://{ streamUrl }:{ streamPort }/{ serverUsername }/{ serverPassword }/{ channel["stream_id"] }')
-
-
-    output.close()
+        for channel in jsonLive:
+            for cat in jsonCat:
+                if channel['category_id'] == cat['category_id'] and cat['category_name'] not in unwantedCats:
+                    output.write(f'\n#EXTINF:-1 tvg-id="{ channel["epg_channel_id"] }" tvg-name="{ channel["name"] }" tvg-logo="{ str(channel["stream_icon"]) }" group-title="{ cat["category_name"] }",{ channel["name"] }\n')
+                    output.write(f'{ streamProtocol }://{ streamUrl }:{ streamPort }/{ serverUsername }/{ serverPassword }/{ channel["stream_id"] }')
 
 accountJson = getAccount()
 

@@ -5,7 +5,7 @@ import csv					   #Importing the csv module
 
 response = requests.get('https://www.imdb.com/chart/top')
 soup = BeautifulSoup(response.text, 'lxml')
-srank, sname, syear, srating, slink, sdirector = list(), list(), list(), list(), list(), list()
+srank, sname, syear, srating, slink, sdirector = [], [], [], [], [], []
 column = soup.find_all(class_='titleColumn')
 rating = soup.find_all('strong')
 link = soup.find_all('a')
@@ -13,10 +13,8 @@ for i in column:
 	srank.append(i.get_text().strip().split('\n')[0].rstrip('.'))
 	sname.append(i.get_text().strip().split('\n')[1].lstrip())   
 	syear.append(i.get_text().strip().split('\n')[2].strip('()'))
-for i in rating[4:]:
-	srating.append(i.get_text().strip())
-for i in link[77:577:2]:
-	slink.append('https://www.imdb.com' + i.get('href'))
+srating.extend(i.get_text().strip() for i in rating[4:])
+slink.extend('https://www.imdb.com' + i.get('href') for i in link[77:577:2])
 for i in slink:
     response = requests.get(i)
     soup1 = BeautifulSoup(response.text, 'lxml')

@@ -2,11 +2,11 @@ import subprocess
 import optparse
 import re
 def mac_changer(iface, mac):
-    print("[*]changing mac address for " + iface + " to " + mac)
+    print(f"[*]changing mac address for {iface} to {mac}")
     subprocess.call(["ifconfig", iface, "down"])
     subprocess.call(["ifconfig", iface, "hw", "ether", mac])
     subprocess.call(["ifconfig", iface, "up"])
-    print("[*]mac address of " + iface + " changed to " + mac)
+    print(f"[*]mac address of {iface} changed to {mac}")
 def get_arguments():
     parser = optparse.OptionParser()
     parser.add_option("-i", "--interface", dest="iface", help="interface")
@@ -19,12 +19,13 @@ def get_arguments():
     return arguments
 def current_mac(interface):
     ifconfig_result = subprocess.check_output(["ifconfig", interface]).decode("utf-8")
-    curr_mac = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_result)
-    if not curr_mac:
-        print("[*]sorry unable to get your mac adress")
-    else:
-        print("[*]your current mac is " + curr_mac[0])
+    if curr_mac := re.search(
+        r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_result
+    ):
+        print(f"[*]your current mac is {curr_mac[0]}")
         return curr_mac[0]
+    else:
+        print("[*]sorry unable to get your mac adress")
 
 
 arguments = get_arguments()
