@@ -14,9 +14,9 @@ print("Starting the game... [ TIC TAC TOE ]")
 def full_board():
     print()
     print("                      (POSITIONS)")
-    print(board[0]+' |',board[1]+' |',board[2],"             1 | 2 | 3 ")
-    print(board[3]+' |',board[4]+' |',board[5],"             4 | 5 | 6 ")
-    print(board[6]+' |',board[7]+' |',board[8],"             7 | 8 | 9 ")
+    print(f'{board[0]} |', f'{board[1]} |', board[2], "             1 | 2 | 3 ")
+    print(f'{board[3]} |', f'{board[4]} |', board[5], "             4 | 5 | 6 ")
+    print(f'{board[6]} |', f'{board[7]} |', board[8], "             7 | 8 | 9 ")
     print()
 
 full_board()
@@ -51,30 +51,30 @@ def game_over():
     col3= board[2]==board[5]==board[8]!="-"
     dig1= board[0]==board[4]==board[8]!="-"
     dig2= board[2]==board[4]==board[6]!="-"
-    if row1 :
+    if row1:
         result= True
-        print("Congratulations... Player",board[0]+"'s won")
-    elif row2 :
+        print("Congratulations... Player", f"{board[0]}'s won")
+    elif row2:
         result= True
-        print("Congratulations... Player",board[3]+"'s won")
-    elif row3 :
+        print("Congratulations... Player", f"{board[3]}'s won")
+    elif row3:
         result= True
-        print("Congratulations... Player",board[6]+"'s won")
-    elif col1 :
+        print("Congratulations... Player", f"{board[6]}'s won")
+    elif col1:
         result= True
-        print("Congratulations... Player",board[0]+"'s won")
-    elif col2 :
+        print("Congratulations... Player", f"{board[0]}'s won")
+    elif col2:
         result= True
-        print("Congratulations... Player",board[1]+"'s won")
-    elif col3 :
+        print("Congratulations... Player", f"{board[1]}'s won")
+    elif col3:
         result= True
-        print("Congratulations... Player",board[2]+"'s won")
-    elif dig1 :
+        print("Congratulations... Player", f"{board[2]}'s won")
+    elif dig1:
         result= True
-        print("Congratulations... Player",board[0]+"'s won")
-    elif dig2 :
-        result= True 
-        print("Congratulations... Player",board[2]+"'s won")
+        print("Congratulations... Player", f"{board[0]}'s won")
+    elif dig2:
+        result= True
+        print("Congratulations... Player", f"{board[2]}'s won")
     elif "-" not in board :
         result = True
         print("Game Tied")
@@ -111,10 +111,10 @@ while True:
         flip()
     print()
     loop=input("You want to replay the game (y/n): ")
-    if loop=="Y" or loop=="y":
+    if loop in ["Y", "y"]:
         result=None
         restart()
-    elif loop=="N" or loop=="n":
+    elif loop in ["N", "n"]:
         break
    
 #end

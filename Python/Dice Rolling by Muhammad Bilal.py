@@ -14,21 +14,18 @@ def Roll():
     if c == d:
 
         messagebox.showinfo("Error","Error !")
-        
+
     elif c == diceNumber:
 
         messagebox.showinfo("Dice Rolled",diceNumber)
-        messagebox.showinfo("Hoohoo!",a+" WON :-)")
-        messagebox.showinfo("Dare",b+" "+e)
-        
+        messagebox.showinfo("Hoohoo!", f"{a} WON :-)")
+        messagebox.showinfo("Dare", f"{b} {e}")
+
     elif d == diceNumber:
 
         messagebox.showinfo("Dice Rolled",+diceNumber)
-        messagebox.showinfo("Hoohoo!",b+" WON :-)")
-        messagebox.showinfo("Dare",a+" "+e)
-    elif (c and d == diceNumber):
-
-        messagebox.showinfo("Tie","Its a tie")
+        messagebox.showinfo("Hoohoo!", f"{b} WON :-)")
+        messagebox.showinfo("Dare", f"{a} {e}")
     else:
 
         messagebox.showinfo("Dice Rolled",diceNumber)

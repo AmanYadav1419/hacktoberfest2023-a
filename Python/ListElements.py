@@ -6,14 +6,12 @@ Bonus: Can you do this in one pass?"""
 
 
 
+
 x=int(input('Enter the list size:'))
-l1=[]
 i=0
 
 print('Enter list elements:\n')
-for i in range(x):
-    l1.append(int(input()))
-       
+l1 = [int(input()) for _ in range(x)]
 k=int(input('Enter the no:'))
 
 y='False'
@@ -26,6 +24,6 @@ for j in range(x):
     if((start+l1[j])==k):
         y='True'
     j+=1
-    
+
 print(y)
     

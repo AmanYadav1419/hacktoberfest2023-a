@@ -15,7 +15,7 @@ url = input("Enter the url: ")
 
 #Looping until the opening time and current time matches
 while (Current_time != opening_time):
-	print("Current Time: " + Current_time)
+	print(f"Current Time: {Current_time}")
 	Current_time = time.strftime("%I:%M:%S")
 	time.sleep(1)
 

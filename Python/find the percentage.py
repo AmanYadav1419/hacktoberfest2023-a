@@ -9,7 +9,7 @@ if __name__ == '__main__':
 if query_name in student_marks:
     l=list(student_marks[query_name])
     sum=0
-    for i in range(len(l)):
-     sum= l[i]+sum
+    for item in l:
+        sum = item + sum
 print("{:.2f}".format(sum/3))
      

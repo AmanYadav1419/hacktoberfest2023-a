@@ -22,21 +22,16 @@ class RegistrationForm(FlaskForm):
 
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user:
+        if user := User.query.filter_by(username=username.data).first():
             raise ValidationError('username is already taken, try different one')
 
     def validate_email(self,email):
-        user = User.query.filter_by(email=email.data).first()
-        if user:
+        if user := User.query.filter_by(email=email.data).first():
             raise ValidationError('email address is already registerd, try different one')
         
     def validate_password(self, password):
         specialCharacters = '!@#$%^&*()_+-={}[]|\\:;\'"?/>.<,~`'
-        specialTotal = 0
-        for char in password.data:
-            if char in specialCharacters:
-                specialTotal += 1
+        specialTotal = sum(1 for char in password.data if char in specialCharacters)
         if not specialTotal:
             raise ValidationError('password should contain one or more special characters')
 
@@ -77,14 +72,12 @@ class UniqueDetailsUpdateForm(FlaskForm):
 
     def validate_username(self, username):
         if current_user.username != username.data:
-            user = User.query.filter_by(username=username.data).first()
-            if user:
+            if user := User.query.filter_by(username=username.data).first():
                 raise ValidationError('username is already taken, try different one')
 
     def validate_email(self,email):
         if current_user.email != email.data:
-            user = User.query.filter_by(email=email.data).first()
-            if user:
+            if user := User.query.filter_by(email=email.data).first():
                 raise ValidationError('email address is already registerd, try different one')
 
 

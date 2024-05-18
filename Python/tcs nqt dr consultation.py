@@ -10,10 +10,10 @@ while True:
     elif age<17:
         fees += 200
         n += 1
-    elif age<40 and age>=17:
+    elif age < 40:
         fees += 400
         n += 1
-    elif age>=40:
+    else:
         fees += 300
         n += 1
 print(fees)

@@ -25,10 +25,9 @@ def name0():
     speak("PLease type my new name Sir!")
     query3 = input("Enter my new name sir: ")
     speak("I am happy to have that name Sir")
-    rew = open("name0.txt", 'w')
-    rew.write(query3.lower())
-    name0_read()
-    rew.close()
+    with open("name0.txt", 'w') as rew:
+        rew.write(query3.lower())
+        name0_read()
 
 
 def name1():
@@ -38,10 +37,9 @@ def name1():
     speak("PLease type my new name Sir!")
     query3 = input("Enter my new name sir: ")
     speak("I am happy to have that name Sir")
-    remm = open("name1.txt", 'w')
-    remm.write(query3.lower())
-    name1_read()
-    remm.close()
+    with open("name1.txt", 'w') as remm:
+        remm.write(query3.lower())
+        name1_read()
 
 
 def name1_read():
@@ -70,27 +68,25 @@ def sunday_to_jarvis():
     sound = engine.getProperty('voices')
     engine.setProperty('voice', sound[0].id)
     name0_read()
-    speak("whats up sir!" + name + "is happy to serve you")
+    speak(f"whats up sir!{name}is happy to serve you")
 
 
 def time():
-    time = "time right now is"
-    time = time + datetime.datetime.now().strftime("%I:%M %p")
+    time = "time right now is" + datetime.datetime.now().strftime("%I:%M %p")
     speak(time)
 
 
 def today_date():
     date = "Today's date is "
-    year = int(datetime.datetime.now().year)
-    month = int(datetime.datetime.now().month)
-    day = int(datetime.datetime.now().day)
+    year = datetime.datetime.now().year
+    month = datetime.datetime.now().month
+    day = datetime.datetime.now().day
     date = date + str(day) + " " + str(month) + " " + str(year)
     speak(date)
 
 
 def day_name():
-    day = "Today is"
-    day = day + datetime.datetime.now().strftime("%A")
+    day = "Today is" + datetime.datetime.now().strftime("%A")
     speak(day)
 
 
@@ -187,10 +183,10 @@ def wiki_google(query):
             query2 = query2.lower()
             print(query2)
             if 'google' in query2:
-                q = query + "google"
+                q = f"{query}google"
                 wiki_google(q)
             elif 'wikipedia' in query2:
-                q = query + "wikipedia"
+                q = f"{query}wikipedia"
                 wiki_google(q)
             else:
                 speak("Okay sir! waiting for next instructions")
@@ -215,12 +211,12 @@ def wish_me():
             speak("Good Evening Sir")
         else:
             speak("Hii whats up ")
-        speak(name + "is always ready to help you")
+        speak(f"{name}is always ready to help you")
 
     elif i == 1:
         name1_read()
         speak("Welcome back sir!")
-        speak(" It's  " + name)
+        speak(f" It's  {name}")
     speak("How was your Day")
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -331,32 +327,31 @@ def remember_jarvis():
             break
         else:
             speak("Can you try again sir")
-    query3 = str(query3) + ".txt"
-    rem = open(query3, 'a')
-    speak("What should i Write sir")
-    speak("Tell me when u are done")
-    query5 = 00
-    while True:
-        r = sr.Recognizer()
-        with sr.Microphone() as source:
-            print("Listening...")
-            r.pause_threshold = 1
-            audio = r.listen(source)
+    query3 = f"{str(query3)}.txt"
+    with open(query3, 'a') as rem:
+        speak("What should i Write sir")
+        speak("Tell me when u are done")
+        query5 = 00
+        while True:
+            r = sr.Recognizer()
+            with sr.Microphone() as source:
+                print("Listening...")
+                r.pause_threshold = 1
+                audio = r.listen(source)
 
-        try:
-            print("Recognising...")
-            query5 = r.recognize_google(audio)
-            print(query5)
-            if 'done' in query5 and name in query5:
-                break
-            rem.write(query5 + "\n")
-        except Exception as e:
-            query5 = 00
-            speak("Can you say that again please")
-            print(e)
-        query5 = str(query5).lower()
-        speak("I saved the file Sir")
-    rem.close()
+            try:
+                print("Recognising...")
+                query5 = r.recognize_google(audio)
+                print(query5)
+                if 'done' in query5 and name in query5:
+                    break
+                rem.write(query5 + "\n")
+            except Exception as e:
+                query5 = 00
+                speak("Can you say that again please")
+                print(e)
+            query5 = str(query5).lower()
+            speak("I saved the file Sir")
 
 
 def open_remember():
@@ -378,7 +373,7 @@ def open_remember():
         if query9 != 00:
             break
     try:
-        query9 = query9.trim() + ".txt"
+        query9 = f"{query9.trim()}.txt"
         rem = open(query9, 'r')
         speak("remembered file is printed! you can check")
         print(rem.read())
@@ -437,40 +432,30 @@ if __name__ == "__main__":
         # for time - "current time please"
         if ' time' in query:
             time()
-        # for date - "today's date"
         elif ' date' in query:
             today_date()
-        # for day
         elif ' day' in query:
             day_name()
-        # for general greetings - use "Hello" with assistant's name
         elif ('hello' in query or 'hi' in query or "what's up" in query) and name in query:
             speak("Hello Sir")
             speak("i'm fine sir what I must do for you")
-        # About assistant - "About Yourself"
-        elif ' about' in query or 'who are u' in query or '':
+        elif ' about' in query or 'who are u' in query:
             if ' yourself' in query:
                 speak("that's a secret")
                 speak("Can't tell u that")
-            # about your master
-            elif 'master' in query or 'an':
+            else:
                 master_animesh()
-        # for wikipedia or google search - use "What is" or "Search"
         elif 'search' in query or 'what is' in query:
             wiki_google(query)
-        # to shutdown, restart, logout or lock screen - use desired operation with screen or windows
         elif (
                 'shutdown' in query or 'restart' in query or 'logout' in query or 'lockscreen' in query or 'lock screen' in query or 'lock' in query) and (
                 'system' in query or 'windows' in query or 'screen' in query):
             shutdown_restart(query)
-        # for playing songs - "play songs" or "play music"
         elif 'play' in query and ('songs' in query or 'song' in query or 'music' in query or 'musics' in query):
             play_songs()
-        # try saying "Fu*k You" ;)
         elif 'f*** you' in query:
             speak("Fuck you back")
             speak("Don't abuse sir")
-        # to shutdown assistant - use "switch off" or "shutdown" with name of assistant
         elif (
                 'switch off' in query or 'shutdown' in query or 'f*** of' in query or 'f*** off' in query or 'bye' in query) and name in query:
             print(name)
@@ -481,13 +466,11 @@ if __name__ == "__main__":
         elif "what's" in query and 'name' in query and ('her' in query or 'him' in query):
             if i == 0:
                 rem = open('name1.txt', 'r')
-                speak("She is! " + rem.read())
-                print(rem.read())
+                speak(f"She is! {rem.read()}")
             else:
                 rem = open('name0.txt', 'r')
-                speak("he is! " + rem.read())
-                print(rem.read())
-        # Asking assistant to remember something - use "Remember" with name of assistant
+                speak(f"he is! {rem.read()}")
+            print(rem.read())
         elif 'remember' in query:
             if name in query and 'folder' not in query:
                 remember_jarvis()
@@ -497,21 +480,14 @@ if __name__ == "__main__":
             else:
                 speak("Sorry Sir!")
                 speak("Either i got u wrong or i Can't do that")
-        # to change name of assistant - use "change" and current name of assistant
         elif name in query and 'change' in query:
             if i == 0:
                 name0()
             elif i == 1:
                 name1()
-        # Asking current name of assistant - "Your name please"
         elif 'your' in query and 'name' in query:
-            if i == 0:
-                rem = open('name0.txt', 'r')
-                speak("I am " + rem.read())
-            else:
-                rem = open('name1.txt', 'r')
-                speak("I am " + rem.read())
-        # to call other assistant - use "call" and other assistant's name
+            rem = open('name0.txt', 'r') if i == 0 else open('name1.txt', 'r')
+            speak(f"I am {rem.read()}")
         elif 'call' in query or 'cal' in query:
             rem = open('name0.txt', 'r')
             rem1 = open('name1.txt', 'r')
@@ -520,16 +496,15 @@ if __name__ == "__main__":
                 if i == 0:
                     jarvis_to_sunday()
                 if i == 1:
-                    speak("I am " + rem1.read())
+                    speak(f"I am {rem1.read()}")
             elif rem.read() in query:
                 if i == 1:
                     sunday_to_jarvis()
                 else:
-                    speak("I am " + rem.read() + " speaking Sir")
+                    speak(f"I am {rem.read()} speaking Sir")
             else:
                 speak("Who is this person?")
                 speak("Are you hiring some new Assistant? Sir")
-        # To make assistant wait for you - use "wait" with assistant's name
         elif 'wait' in query and name in query:
             speak("I will be ready")
             speak("When you r ready")
@@ -545,7 +520,6 @@ if __name__ == "__main__":
                 s = s.lower()
             if s == 'yes':
                 speak("Welcome back sir!")
-        # for today's news - "Today's news"
         elif "today's news" in query or 'news for today' in query:
             new_today()
         elif query != 00:

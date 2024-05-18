@@ -13,7 +13,7 @@ def bfs(graph, root):
 
         # Dequeue a vertex from queue
         vertex = queue.popleft()
-        print(str(vertex) + " ", end="")
+        print(f"{str(vertex)} ", end="")
 
         # If not visited, mark it as visited, and
         # enqueue it

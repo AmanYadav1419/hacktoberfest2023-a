@@ -3,8 +3,8 @@ import numpy as np
 import os
 
 def xor_two_pictures(path1, path2):
-    picture1 = cv2.imread(os.getcwd() + "/" + path1)
-    picture2 = cv2.imread(os.getcwd() + "/" + path2)
+    picture1 = cv2.imread(f"{os.getcwd()}/{path1}")
+    picture2 = cv2.imread(f"{os.getcwd()}/{path2}")
 
     assert picture1.shape == picture2.shape, "invalid size"
 

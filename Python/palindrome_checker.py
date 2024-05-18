@@ -6,8 +6,7 @@ while True:
     op = int(input("Enter your choice: "))
     if op == 1:
         word = input("Enter the string: ")
-        ans = isPalindrome(word)
-        if ans:
+        if ans := isPalindrome(word):
             print("Yes,the given string is a palindrome")
         else:
             print("No,the given string is not a palindrome")

@@ -23,19 +23,14 @@ def connect_to_api(api, username):
         except AttributeError:
             return "User not found D:"
 
-        if profile_pic != "":
-            return profile_pic
-        else:
-            return None
-
+        return profile_pic if profile_pic != "" else None
     elif api == "backup":
         r = requests.get(BACKUP_API, headers=headers)
         resp = r.json()
         if len(resp) == 0:
             return "User not found D:"
         print("Connected!\n")
-        profile_pic = resp["graphql"]["user"]["profile_pic_url_hd"]
-        return profile_pic
+        return resp["graphql"]["user"]["profile_pic_url_hd"]
 
 
 def main_func():
@@ -44,13 +39,10 @@ def main_func():
     start = datetime.datetime.now()
     print("\nConnecting...\n")
     _profilepic = connect_to_api("target", username)
-    if _profilepic is not None:
-        print(_profilepic)
-    else:
+    if _profilepic is None:
         print("Target API Failed!...Trying the Backup Method\n")
         _profilepic = connect_to_api("backup", username)
-        print(_profilepic)
-
+    print(_profilepic)
     end = datetime.datetime.now()
     total_time = (end - start).total_seconds()
     print(f"\nDone!")

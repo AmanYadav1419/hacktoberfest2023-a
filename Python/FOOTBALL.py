@@ -79,36 +79,26 @@ def kick(player):
         direction = random.randint(MIN_GOALKEEPER, MAX_GOALKEEPER)
 
         #Check if the user or computer scored
-    score= goal_check (goalkeeper_action (direction), player)
-
-    return score
+    return goal_check (goalkeeper_action (direction), player)
 
 def goal_check(goal, player):
 #This function check if the user or the computer scored
     #define scoring value
     score = 0
-    if (goal):
+    if goal:
         if (player == "user"):
-            score += 1
             print ("!!!!! USER SCOOOOOOOOORED !!!!!")
         else:
-            score +=1 
             print ("!!!!! COMPUTER SCOOOOOORED !!!!!")
+        score += 1
+    elif (player == "user"):
+        print ("UUUUFFFFF #### COMPUTER GOALKEEPER STOPPED THE GOAL #####")
     else:
-        if (player == "user"):
-            print ("UUUUFFFFF #### COMPUTER GOALKEEPER STOPPED THE GOAL #####")
-        else:
-            print ("UUUUFFFF #### USER GOALKEEPER STOPPED THE GOAL ######")    
+        print ("UUUUFFFF #### USER GOALKEEPER STOPPED THE GOAL ######")
     return score
 
 def goalkeeper_action(direction):
-    #The goalkeeper action is random
-    #the computer will decide if the penalty was stopped or not
-    action = direction == random.randint(MIN_GOALKEEPER, MAX_GOALKEEPER)
-    if (action):
-        return True
-    else:
-        return False
+    return direction == random.randint(MIN_GOALKEEPER, MAX_GOALKEEPER)
 
 
 if __name__ == "__main__":

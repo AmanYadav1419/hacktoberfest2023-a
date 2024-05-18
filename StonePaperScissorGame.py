@@ -34,40 +34,30 @@ def play_game(human,com):
 #for decide who is winner.
 def winner(c1,c2):
     global com
-    global human 
+    global human
     if c1 == c2:
         print("Draw")
         return None
-    elif c1 < c2 :
-        if c1 == 2 and c2==3:
+    elif c1 < c2:
+        if c1 == 2 and c2 == 3 or c2 != 3:
             human += 1
             print("Congratulations!...You Win.")
-            return None
-        elif c2 != 3:
-            human += 1
-            print("Congratulations!...You Win.")
-            #print(f"P1 : {human}")
-            return None
         else:
             com+=1
             print("Oops!...Best of luck next time.")
-            # print(f"P2 : {com}")
-            return None
-    elif c2 < c1 :
+        return None
+    elif c2 < c1:
         if c2 == 2 and c1==3:
             com += 1
             print("Oops!...Best of luck next time.")
-            return None
         elif c1 != 3:
             print("Oops!...Best of luck next time.")
             com += 1
-            #print(f"P1 : {human}")
-            return None
         else:
             human+=1
             print("Congratulations!...You Win.")
-            # print(f"P2 : {com}")
-            return None
+
+        return None
 
 #for desplaying result.    
 def display_result(c1,c2):

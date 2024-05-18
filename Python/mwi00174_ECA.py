@@ -12,36 +12,15 @@ def VectorAdd(a,b):
 
 	#Check equality of the vectors
     assert len(a)==len(b)
-	
-	#Initialise an empty vector list
-    newVector = []
-	
-	#Iterate with respect to the vector length and add corresponding values
-    for i in range(len(a)):
-	
-            v = a[i] + b[i]
-			
-            newVector.append(v)
-    
-    
-    return newVector
+
+    return [a[i] + b[i] for i in range(len(a))]
 #  performs vector subtraction on two vectors and returns a 
 # vector
 def VectorSub(a,b):
 	#check if length of vectors are equal
     assert len(a)==len(b)
-	
-	#Initialize an empty vector list
-    newVector = []
-	
-	#Iterate the  indices wrt to vector length and subtract corresponding values
-    for i in range(len(a)):
-	
-            v = a[i] - b[i]
-			
-            newVector.append(v)
-			
-    return newVector
+
+    return [a[i] - b[i] for i in range(len(a))]
 
 
 # Implement this: VectorMult() performs vector multiplication and returns a scalar 

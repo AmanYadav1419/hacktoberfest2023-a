@@ -91,13 +91,11 @@ def gameloop():
                 snk_length +=5
 
             gameWindow.fill(white)
-            text_screen("Score: " + str(score * 10), red, 5, 5)
+            text_screen(f"Score: {str(score * 10)}", red, 5, 5)
             pygame.draw.rect(gameWindow, red, [food_x, food_y, snake_size, snake_size])
             pygame.draw.line(gameWindow, red, (0,40), (900,40),5)
 
-            head = []
-            head.append(snake_x)
-            head.append(snake_y)
+            head = [snake_x, snake_y]
             snk_list.append(head)
 
             if len(snk_list)>snk_length:

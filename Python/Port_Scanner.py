@@ -37,11 +37,7 @@ def check_port(ip, port):
         return 1
 
 def scan(ip):
-    open_ports = [] 
-    for port in portlist:
-        if check_port(ip, port) == 0:
-            open_ports.append(port)
-    return open_ports
+    return [port for port in portlist if check_port(ip, port) == 0]
 
 def main():
     open_ports = []

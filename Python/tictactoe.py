@@ -11,13 +11,13 @@ board = ["-", "-", "-",
 
 # Display the initial board
 def display_board():
-    print(board[0] + " | " + board[1] + " | " + board[2])
-    print(board[3] + " | " + board[4] + " | " + board[5])
-    print(board[6] + " | " + board[7] + " | " + board[8])
+    print(f"{board[0]} | {board[1]} | {board[2]}")
+    print(f"{board[3]} | {board[4]} | {board[5]}")
+    print(f"{board[6]} | {board[7]} | {board[8]}")
 
 # Handling a turn of a particular player
 def handle_turn(player):
-    print(player + " turn...")
+    print(f"{player} turn...")
     position = input("Choose position from 1-9: ")
     valid = False
     while not valid:
@@ -159,10 +159,10 @@ def play_game():
 
         # Flip the player
         flip_player()
-    if winner == "X" or winner == "O":
+    if winner in ["X", "O"]:
         print(f"{winner}  Won...")
 
-    elif winner == None:
+    elif winner is None:
         print("Tie...")
 
 

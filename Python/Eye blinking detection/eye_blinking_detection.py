@@ -25,8 +25,7 @@ def get_blinking_ratio(eye_points, facial_landmarks):
     hor_line_lenght = hypot((left_point[0] - right_point[0]), (left_point[1] - right_point[1]))
     ver_line_lenght = hypot((center_top[0] - center_bottom[0]), (center_top[1] - center_bottom[1]))
 
-    ratio = hor_line_lenght / ver_line_lenght
-    return ratio
+    return hor_line_lenght / ver_line_lenght
 
 while True:
     _, frame = cap.read()

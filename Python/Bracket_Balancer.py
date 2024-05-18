@@ -10,15 +10,11 @@ def check(myStr):
             st.append(i)
         elif i in cl:
             pos = cl.index(i)
-            if ((len(st) > 0) and
-                (ol[pos] == st[len(st)-1])):
+            if st and ol[pos] == st[-1]:
                 st.pop()
             else:
                 return "Unbalanced"
-    if len(st) == 0:
-        return "Balanced"
-    else:
-        return "Unbalanced"
+    return "Balanced" if not st else "Unbalanced"
   
   
 STR = "{[]{()}}"

@@ -58,7 +58,7 @@ def decrypt(encrypted_string, n):
 plain_text = "TestThisString"
 n = 4
 print("Text  : ", plain_text)
-print("Shift : ", str(n))
+print("Shift : ", n)
 encrypted_string = encrypt(plain_text, n)
 print("Cipher: ", encrypt(plain_text, n))
 print("Decrypted Cipher Text: ", decrypt(encrypted_string, n))

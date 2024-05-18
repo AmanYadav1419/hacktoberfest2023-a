@@ -62,7 +62,7 @@ class birthdayLogger:
             if len(dob_list) < 3:
                 print('Please Enter in DD/MM/YYYY format')
             else:
-                for x in range(len(dob_list)):
+                for _ in range(len(dob_list)):
                     date, month, year = dob_list
                     date = int(date)
                     month = int(month)
@@ -78,7 +78,7 @@ class birthdayLogger:
                         date, month, year = date_of_birth.split(' ')
                         date = date.zfill(2)
                         month = month.zfill(2)
-                        date_of_birth = date+' '+month+' '+year
+                        date_of_birth = f'{date} {month} {year}'
                     date_of_birth = date_of_birth.replace(' ', '-')
                     self.b_list = [name, date_of_birth]
                     # print(self.b_list)

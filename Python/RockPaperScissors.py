@@ -55,7 +55,7 @@ while (n < f + 1):
         continue
 
     print(f"Number of rounds Remaining : {f - n}")
-    n = n + 1
+    n += 1
 
 if playwin > comwin:
     print("\n////CONGRATS YOU WIN GAME\\\\\\\\")

@@ -1,4 +1,4 @@
-A= [x for x in input("Enter a string: ")]
+A = list(input("Enter a string: "))
 blocks= []
 seg= ""
 for i in range(len(A)):

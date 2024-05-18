@@ -34,7 +34,7 @@ def contact_us():
 
 def registration_mail(user):
     msg = Message('Registration Successful', sender=('Team Sakha',app.config['MAIL_USERNAME']), recipients=[user.email])
-    msg.html = f'''<h1>🎊 Congratulation {user.firstname + ' ' + user.lastname}</h1>
+    msg.html = f'''<h1>🎊 Congratulation {f'{user.firstname} {user.lastname}'}</h1>
 <p>You have created a brand new account in our platform and we are glad to get you as a new user and welcome you on </b>Sakha</b>.</p>
 <p>You can login using the <a href="http://127.0.0.1:5000/login" target="_blank" rel="noreferrer noopener">link</a>.</p>'''
     mail.send(msg)
@@ -138,8 +138,7 @@ def dateModifier(time):
             'July','Aug','Sep', 'Oct','Nov','Dec'
             ]
     dateArray = time.split('/')
-    mod_date = months[int(dateArray[0]) - 1] + ' ' + dateArray[1]
-    return mod_date
+    return f'{months[int(dateArray[0]) - 1]} {dateArray[1]}'
 
 @app.route('/profile')
 @login_required
@@ -173,7 +172,7 @@ def save_pic(pic):
     return mod_pic
 
 def delete_pic(file):
-    if file != 'default.png' and file != 'header.jpg':
+    if file not in ['default.png', 'header.jpg']:
         path = os.path.join(app.config['UPLOAD_PATH'], 'static', 'user-images', file)
         try:
             os.remove(path)

@@ -33,8 +33,7 @@ def outside_window():
     top_wall = t.window_height()/2
     bottom_wall = -t.window_height()/2
     (x,y) = caterpillar.pos()
-    outside = x < left_wall or  x > right_wall or  y < bottom_wall or y > top_wall
-    return outside
+    return x < left_wall or  x > right_wall or  y < bottom_wall or y > top_wall
 
 def game_over():
     caterpillar.color('yellow')
@@ -87,19 +86,19 @@ def start_game():
             break
 
 def move_up():
-    if caterpillar.heading() == 0 or caterpillar.heading() == 180:
+    if caterpillar.heading() in [0, 180]:
         caterpillar.setheading(90)
 
 def move_down():
-    if caterpillar.heading() == 0 or caterpillar.heading() == 180:
+    if caterpillar.heading() in [0, 180]:
         caterpillar.setheading(270)
 
 def move_left():
-    if caterpillar.heading() == 90 or caterpillar.heading() == 270:
+    if caterpillar.heading() in [90, 270]:
         caterpillar.setheading(180)
 
 def move_right():
-    if caterpillar.heading() == 90 or caterpillar.heading() == 270:
+    if caterpillar.heading() in [90, 270]:
         caterpillar.setheading(0)
 
 t.onkey(start_game,'space')

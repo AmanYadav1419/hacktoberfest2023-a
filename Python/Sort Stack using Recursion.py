@@ -47,13 +47,7 @@ def printStack(s):
 
 # Driver Code
 if __name__ == '__main__':
-	s = []
-	s.append(30)
-	s.append(-5)
-	s.append(18)
-	s.append(14)
-	s.append(-3)
-
+	s = [30, -5, 18, 14, -3]
 	print("Stack elements before sorting: ")
 	printStack(s)
 

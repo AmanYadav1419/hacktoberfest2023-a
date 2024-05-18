@@ -3,22 +3,19 @@ arr=[]
 res=[]
 
 def split(word):
-    return [char for char in word]
+    return list(word)
 
 for i in range(x):
     b=[]
-    c=[]
     arr.append(str(input()))
     y=len(arr[i])
-    p=int(len(arr[i]) /2)
-    
-    if(y%2!=0):
+    p = len(arr[i]) // 2
+
+    if (y%2!=0):
         b.append(split(arr[i][p+1:]))
-        c.append(split(arr[i][:p]))
-         
     else:
         b.append(split(arr[i][p:]))
-        c.append(split(arr[i][:p]))
+    c = [split(arr[i][:p])]
     d = c[0].copy()
     e = b[0].copy()
     for j in range(len(d)):

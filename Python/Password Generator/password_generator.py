@@ -25,8 +25,8 @@ password = ""
 index = len(characters)
 
 while length != n:
-	password = password + characters[random.randint(0,index - 1)]		
-	n = n + 1
+	password = password + characters[random.randint(0,index - 1)]
+	n += 1
 
 print('\n')
 print(password)

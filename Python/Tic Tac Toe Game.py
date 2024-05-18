@@ -7,10 +7,8 @@ class TicTacToe:
         self.board = []
 
     def create_board(self):
-        for i in range(3):
-            row = []
-            for j in range(3):
-                row.append('-')
+        for _ in range(3):
+            row = ['-' for _ in range(3)]
             self.board.append(row)
 
     def get_random_first_player(self):
@@ -26,47 +24,20 @@ class TicTacToe:
 
         # checking rows
         for i in range(n):
-            win = True
-            for j in range(n):
-                if self.board[i][j] != player:
-                    win = False
-                    break
-            if win:
+            if win := all(self.board[i][j] == player for j in range(n)):
                 return win
 
         # checking columns
         for i in range(n):
-            win = True
-            for j in range(n):
-                if self.board[j][i] != player:
-                    win = False
-                    break
-            if win:
+            if win := all(self.board[j][i] == player for j in range(n)):
                 return win
 
-        # checking diagonals
-        win = True
-        for i in range(n):
-            if self.board[i][i] != player:
-                win = False
-                break
-        if win:
+        if win := all(self.board[i][i] == player for i in range(n)):
             return win
 
-        win = True
-        for i in range(n):
-            if self.board[i][n - 1 - i] != player:
-                win = False
-                break
-        if win:
+        if win := all(self.board[i][n - 1 - i] == player for i in range(n)):
             return win
         return False
-
-        for row in self.board:
-            for item in row:
-                if item == '-':
-                    return False
-        return True
 
     def is_board_filled(self):
         for row in self.board:
